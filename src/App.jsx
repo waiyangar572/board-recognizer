@@ -35,6 +35,7 @@ function App() {
                     "Content-Type": "multipart/form-data",
                 },
             });
+            print(response);
             setAnalysisResult(response.data);
         } catch (err) {
             setError("分析中にエラーが発生しました。" + (err.response?.data?.detail || ""));
