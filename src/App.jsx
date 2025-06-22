@@ -16,10 +16,8 @@ function App() {
             var img = new Uint8Array(reader.result);
             imgs.push(img);
         };
-        console.log(event.target.files);
-
-        for (var file in event.target.files) {
-            console.log(file);
+        for (var ind in event.target.files) {
+            const file = event.target.files[ind];
             reader.readAsDataURL(file);
         }
         setSelectedFiles(imgs);
