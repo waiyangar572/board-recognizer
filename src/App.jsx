@@ -10,11 +10,16 @@ function App() {
     const [error, setError] = useState("");
 
     const handleFileChange = (event) => {
-        const paths = [];
+        const imgs = [];
+        const reader = new FileReader();
+        reader.onload = function () {
+            var img = new Uint8Array(reader.result);
+            imgs.push(img);
+        };
         for (var file in event.target.files) {
-            paths.push(file.path);
+            reader.readAsArrayBuffer(file);
         }
-        setSelectedFiles(paths);
+        setSelectedFiles(imgs);
         setAnalysisResult(null);
         setError("");
     };
