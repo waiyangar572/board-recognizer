@@ -18,6 +18,8 @@ function App() {
         };
         for (var ind in event.target.files) {
             const file = event.target.files[ind];
+            console.log(file);
+            
             reader.readAsDataURL(file);
         }
         setSelectedFiles(imgs);
