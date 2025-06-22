@@ -13,7 +13,7 @@ function App() {
         const imgs = [];
         console.log(event.target.files);
 
-        for (var ind in event.target.files) {
+        for (var ind = 0; ind<event.target.files["length"];ind++) {
             const file = event.target.files[ind];
             if (typeof file != "number" && typeof ind == "string") {
                 const reader = new FileReader();
