@@ -17,7 +17,7 @@ function App() {
             imgs.push(img);
         };
         for (var file in event.target.files) {
-            reader.readAsArrayBuffer(file);
+            reader.readAsDataURL(file);
         }
         setSelectedFiles(imgs);
         setAnalysisResult(null);
