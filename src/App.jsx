@@ -22,7 +22,7 @@ function App() {
         }
 
         const formData = new FormData();
-        formData.append("file", selectedFile);
+        formData.append("image_paths", selectedFile);
 
         setIsLoading(true);
         setError("");
