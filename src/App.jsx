@@ -50,7 +50,7 @@ function App() {
             <p>ブリッジのプレイ中の写真をアップロードして、手札を認識します。</p>
 
             <div className="controls">
-                <input type="file" accept="image/*" onChange={handleFileChange} />
+                <input type="file" accept="image/*" multiple onChange={handleFileChange} />
                 <button onClick={handleAnalyzeClick} disabled={isLoading}>
                     {isLoading ? "分析中..." : "分析開始"}
                 </button>
