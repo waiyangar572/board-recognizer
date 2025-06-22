@@ -29,7 +29,7 @@ function App() {
 
         try {
             // バックエンドAPIのURL (Hugging Face SpacesのURLに置き換える)
-            const API_URL = "https://YOUR-HF-SPACE-NAME.hf.space/analyze/";
+            const API_URL = "https://huggingface.co/spaces/wai572/board-recognizer";
             const response = await axios.post(API_URL, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",
