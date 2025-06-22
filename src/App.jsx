@@ -4,25 +4,25 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-    const [selectedFile, setSelectedFile] = useState([]);
+    const [selectedFiles, setSelectedFiles] = useState([]);
     const [analysisResult, setAnalysisResult] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
 
     const handleFileChange = (event) => {
-        setSelectedFile(event.target.files);
+        setSelectedFiles(event.target.files);
         setAnalysisResult(null);
         setError("");
     };
 
     const handleAnalyzeClick = async () => {
-        if (!selectedFile) {
+        if (!selectedFiles) {
             setError("画像ファイルを選択してください。");
             return;
         }
 
         const formData = new FormData();
-        formData.append("image_paths", selectedFile);
+        formData.append("image_paths", selectedFiles);
 
         setIsLoading(true);
         setError("");
