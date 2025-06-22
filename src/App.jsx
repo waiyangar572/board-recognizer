@@ -11,18 +11,20 @@ function App() {
 
     const handleFileChange = (event) => {
         const imgs = [];
-        const reader = new FileReader();
-        reader.onload = function () {
-            var img = new Uint8Array(reader.result);
-            imgs.push(img);
-        };
         console.log(event.target.files);
-        
+
         for (var ind in event.target.files) {
-            const file = event.target.files[ind];
-            console.log(file);
-            
-            reader.readAsDataURL(file);
+            if (ind != "length") {
+                const reader = new FileReader();
+                reader.onload = function () {
+                    var img = new Uint8Array(reader.result);
+                    imgs.push(img);
+                };
+                const file = event.target.files[ind];
+                console.log(file);
+
+                reader.readAsDataURL(file);
+            }
         }
         setSelectedFiles(imgs);
         setAnalysisResult(null);
