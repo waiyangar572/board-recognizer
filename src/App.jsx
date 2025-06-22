@@ -4,13 +4,13 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFile, setSelectedFile] = useState([]);
     const [analysisResult, setAnalysisResult] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
 
     const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
+        setSelectedFile(event.target.files);
         setAnalysisResult(null);
         setError("");
     };
