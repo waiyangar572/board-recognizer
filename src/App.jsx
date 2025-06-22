@@ -16,6 +16,8 @@ function App() {
             var img = new Uint8Array(reader.result);
             imgs.push(img);
         };
+        console.log(event.target.files);
+        
         for (var ind in event.target.files) {
             const file = event.target.files[ind];
             console.log(file);
