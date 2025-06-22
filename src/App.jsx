@@ -21,7 +21,7 @@ function App() {
                     var img = new Uint8Array(reader.result);
                     imgs.push(img);
                 };
-                console.log(file);
+                console.log(ind, file);
 
                 reader.readAsDataURL(file);
             }
