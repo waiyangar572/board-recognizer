@@ -15,7 +15,7 @@ function App() {
 
         for (var ind in event.target.files) {
             const file = event.target.files[ind];
-            if (typeof file == "number") {
+            if (typeof file != "number") {
                 const reader = new FileReader();
                 reader.onload = function () {
                     var img = new Uint8Array(reader.result);
