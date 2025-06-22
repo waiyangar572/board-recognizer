@@ -14,13 +14,13 @@ function App() {
         console.log(event.target.files);
 
         for (var ind in event.target.files) {
-            if (ind != "length") {
+            const file = event.target.files[ind];
+            if (file instanceof {}) {
                 const reader = new FileReader();
                 reader.onload = function () {
                     var img = new Uint8Array(reader.result);
                     imgs.push(img);
                 };
-                const file = event.target.files[ind];
                 console.log(file);
 
                 reader.readAsDataURL(file);
