@@ -26,6 +26,8 @@ function App() {
                 reader.readAsDataURL(file);
             }
         }
+        console.log(imgs);
+        
         setSelectedFiles(imgs);
         setAnalysisResult(null);
         setError("");
