@@ -18,8 +18,7 @@ function App() {
             if (typeof file != "number") {
                 const reader = new FileReader();
                 reader.onload = function () {
-                    var img = new Uint8Array(reader.result);
-                    imgs.push(img);
+                    imgs.push(reader.result)
                 };
                 console.log(ind, file);
 
