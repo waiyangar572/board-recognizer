@@ -10,7 +10,11 @@ function App() {
     const [error, setError] = useState("");
 
     const handleFileChange = (event) => {
-        setSelectedFiles(event.target.files);
+        const paths = [];
+        for (var file in event.target.files) {
+            paths.push(file.path);
+        }
+        setSelectedFiles(paths);
         setAnalysisResult(null);
         setError("");
     };
