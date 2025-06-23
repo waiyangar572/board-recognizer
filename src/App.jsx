@@ -23,7 +23,7 @@ function App() {
                 };
                 console.log(ind, file);
                 const options = {
-                    maxSizeMB: 1, // ファイルサイズの最大値 (MB)
+                    maxSizeMB: 0.8, // ファイルサイズの最大値 (MB)
                     maxWidthOrHeight: 1920, // 画像の最大幅または高さ
                     useWebWorker: true, // Web Workerを使用してパフォーマンスを向上
                 };
