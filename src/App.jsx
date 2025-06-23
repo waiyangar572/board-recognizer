@@ -1,6 +1,7 @@
 // src/App.jsx
 import React, { useState } from "react";
 import axios from "axios";
+import imageCompression from "browser-image-compression";
 import "./App.css";
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
             if (typeof file != "number") {
                 const reader = new FileReader();
                 reader.onload = function () {
-                    imgs.push(reader.result)
+                    imgs.push(reader.result);
                 };
                 console.log(ind, file);
 
@@ -26,7 +27,7 @@ function App() {
             }
         }
         console.log(imgs);
-        
+
         setSelectedFiles(imgs);
         setAnalysisResult(null);
         setError("");
@@ -38,11 +39,28 @@ function App() {
             return;
         }
 
-        const formData = new FormData();
-        formData.append("image_paths", selectedFiles);
+        
 
         setIsLoading(true);
         setError("");
+
+        const options = {
+            maxSizeMB: 1, // ファイルサイズの最大値 (MB)
+            maxWidthOrHeight: 1920, // 画像の最大幅または高さ
+            useWebWorker: true, // Web Workerを使用してパフォーマンスを向上
+        };
+        let compresseFiles = [];
+        try {
+            for (let file in selectedFiles) {
+                compresseFiles.push(await imageCompression(file, options));
+            }
+        } catch (e) {
+            setError("画像圧縮中にエラーが発生しました" + (e.response?.data?.detail || ""));
+            setIsLoading(false);
+            return;
+        }
+        const formData = new FormData();
+        formData.append("image_paths", compresseFiles);
 
         try {
             // バックエンドAPIのURL (Hugging Face SpacesのURLに置き換える)
