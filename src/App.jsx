@@ -10,7 +10,7 @@ function App() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
 
-    const handleFileChange = (event) => {
+    const handleFileChange = async (event) => {
         const imgs = [];
         console.log(event.target.files);
 
@@ -22,8 +22,15 @@ function App() {
                     imgs.push(reader.result);
                 };
                 console.log(ind, file);
+                const options = {
+                    maxSizeMB: 1, // ファイルサイズの最大値 (MB)
+                    maxWidthOrHeight: 1920, // 画像の最大幅または高さ
+                    useWebWorker: true, // Web Workerを使用してパフォーマンスを向上
+                };
+                const compressedFile = await imageCompression(file, options);
+                console.log(compressedFile);
 
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(compressedFile);
             }
         }
         console.log(imgs);
@@ -39,28 +46,21 @@ function App() {
             return;
         }
 
-        
-
         setIsLoading(true);
         setError("");
 
-        const options = {
-            maxSizeMB: 1, // ファイルサイズの最大値 (MB)
-            maxWidthOrHeight: 1920, // 画像の最大幅または高さ
-            useWebWorker: true, // Web Workerを使用してパフォーマンスを向上
-        };
-        let compresseFiles = [];
-        try {
-            for (let file in selectedFiles) {
-                compresseFiles.push(await imageCompression(file, options));
-            }
-        } catch (e) {
-            setError("画像圧縮中にエラーが発生しました" + (e.response?.data?.detail || ""));
-            setIsLoading(false);
-            return;
-        }
+        // let compresseFiles = [];
+        // try {
+        //     for (let file in selectedFiles) {
+        //         compresseFiles.push();
+        //     }
+        // } catch (e) {
+        //     setError("画像圧縮中にエラーが発生しました" + (e.response?.data?.detail || ""));
+        //     setIsLoading(false);
+        //     return;
+        // }
         const formData = new FormData();
-        formData.append("image_paths", compresseFiles);
+        formData.append("image_paths", selectedFiles);
 
         try {
             // バックエンドAPIのURL (Hugging Face SpacesのURLに置き換える)
