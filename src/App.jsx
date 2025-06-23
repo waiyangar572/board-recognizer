@@ -60,7 +60,7 @@ function App() {
         //     return;
         // }
         const formData = new FormData();
-        formData.append("image_paths", selectedFiles);
+        formData.append("image_binaries", selectedFiles);
 
         try {
             // バックエンドAPIのURL (Hugging Face SpacesのURLに置き換える)
