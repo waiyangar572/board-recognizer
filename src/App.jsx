@@ -14,28 +14,28 @@ function App() {
         const imgs = [];
         console.log(event.target.files);
 
-        for (var ind = 0; ind < event.target.files["length"]; ind++) {
-            const file = event.target.files[ind];
-            if (typeof file != "number") {
-                const reader = new FileReader();
-                reader.onload = function () {
-                    imgs.push(reader.result);
-                };
-                console.log(ind, file);
-                const options = {
-                    maxSizeMB: 0.8, // ファイルサイズの最大値 (MB)
-                    maxWidthOrHeight: 1920, // 画像の最大幅または高さ
-                    useWebWorker: true, // Web Workerを使用してパフォーマンスを向上
-                };
-                const compressedFile = await imageCompression(file, options);
-                console.log(compressedFile);
+        // for (var ind = 0; ind < event.target.files["length"]; ind++) {
+        //     const file = event.target.files[ind];
+        //     if (typeof file != "number") {
+        //         const reader = new FileReader();
+        //         reader.onload = function () {
+        //             imgs.push(reader.result);
+        //         };
+        //         console.log(ind, file);
+        //         const options = {
+        //             maxSizeMB: 0.8, // ファイルサイズの最大値 (MB)
+        //             maxWidthOrHeight: 1920, // 画像の最大幅または高さ
+        //             useWebWorker: true, // Web Workerを使用してパフォーマンスを向上
+        //         };
+        //         const compressedFile = await imageCompression(file, options);
+        //         console.log(compressedFile);
 
-                reader.readAsDataURL(compressedFile);
-            }
-        }
+        //         reader.readAsDataURL(compressedFile);
+        //     }
+        // }
         console.log(imgs);
 
-        setSelectedFiles(imgs);
+        setSelectedFiles(event.target.files);
         setAnalysisResult(null);
         setError("");
     };
