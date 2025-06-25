@@ -95,7 +95,7 @@ function App() {
                 <h3>選択中のファイル:</h3>
                 {selectedFiles.length === 0 && <p>ファイルが選択されていません。</p>}
                 <ul>
-                    {selectedFiles.map((file, index) => (
+                    {(new Array(selectedFiles)).map((file, index) => (
                         <li key={index}>
                             {file.name}
                             {/* <button className="remove-btn" onClick={() => handleRemoveFile(file.name)}>削除</button> */}
@@ -110,7 +110,7 @@ function App() {
             {analysisResults.length > 0 && (
                 <div className="results-container">
                     <h2>解析結果</h2>
-                    {analysisResults.map((result, index) => (
+                    {list(analysisResults).map((result, index) => (
                         <div key={index} className="result-item">
                             <h3>{result.filename}</h3>
                             {/* ここで各画像の結果を適切に表示する */}
