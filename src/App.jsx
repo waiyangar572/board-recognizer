@@ -1,12 +1,11 @@
 // src/App.jsx
 import React, { useState } from "react";
 import axios from "axios";
-import imageCompression from "browser-image-compression";
 import "./App.css";
 
 function App() {
     const [selectedFiles, setSelectedFiles] = useState([]);
-    const [analysisResult, setAnalysisResult] = useState(null);
+    const [analysisResults, setAnalysisResults] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
 
@@ -36,7 +35,7 @@ function App() {
         console.log(imgs);
 
         setSelectedFiles(event.target.files);
-        setAnalysisResult(null);
+        setAnalysisResults(null);
         setError("");
     };
 
@@ -72,7 +71,7 @@ function App() {
                 },
             });
             console.log(response);
-            setAnalysisResult(response.data);
+            setAnalysisResults(response.data);
         } catch (err) {
             setError("分析中にエラーが発生しました。" + (err.response?.data?.detail || ""));
         } finally {
@@ -92,30 +91,32 @@ function App() {
                 </button>
             </div>
 
+            <div className="file-list">
+                <h3>選択中のファイル:</h3>
+                {selectedFiles.length === 0 && <p>ファイルが選択されていません。</p>}
+                <ul>
+                    {selectedFiles.map((file, index) => (
+                        <li key={index}>
+                            {file.name}
+                            {/* <button className="remove-btn" onClick={() => handleRemoveFile(file.name)}>削除</button> */}
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
             {error && <p className="error">{error}</p>}
 
-            {analysisResult && (
-                <div className="results">
-                    <h2>認識結果 ({analysisResult.filename})</h2>
-                    <div className="hands-grid">
-                        <div className="hand">
-                            <h3>North</h3>
-                            <p>{analysisResult.hands.north.join(", ")}</p>
+            {/* 解析結果の表示 */}
+            {analysisResults.length > 0 && (
+                <div className="results-container">
+                    <h2>解析結果</h2>
+                    {analysisResults.map((result, index) => (
+                        <div key={index} className="result-item">
+                            <h3>{result.filename}</h3>
+                            {/* ここで各画像の結果を適切に表示する */}
+                            <pre>{JSON.stringify(result.hands, null, 2)}</pre>
                         </div>
-                        <div className="hand">
-                            <h3>South</h3>
-                            <p>{analysisResult.hands.south.join(", ")}</p>
-                        </div>
-                        <div className="hand">
-                            <h3>West</h3>
-                            <p>{analysisResult.hands.west.join(", ")}</p>
-                        </div>
-                        <div className="hand">
-                            <h3>East</h3>
-                            <p>{analysisResult.hands.east.join(", ")}</p>
-                        </div>
-                    </div>
-                    {/* ここにDDSの結果やエクスポートボタンを実装 */}
+                    ))}
                 </div>
             )}
         </div>
