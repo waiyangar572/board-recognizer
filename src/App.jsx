@@ -5,7 +5,7 @@ import "./App.css";
 
 function App() {
     const [selectedFiles, setSelectedFiles] = useState([]);
-    const [analysisResults, setAnalysisResults] = useState(null);
+    const [analysisResults, setAnalysisResults] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
 
