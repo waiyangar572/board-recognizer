@@ -97,7 +97,7 @@ function App() {
                 <ul>
                     {(new Array(selectedFiles)).map((file, index) => (
                         <li key={index}>
-                            {file.name}
+                            {file.filename}
                             {/* <button className="remove-btn" onClick={() => handleRemoveFile(file.name)}>削除</button> */}
                         </li>
                     ))}
