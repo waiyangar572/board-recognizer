@@ -110,7 +110,7 @@ function App() {
             {analysisResults.length > 0 && (
                 <div className="results-container">
                     <h2>解析結果</h2>
-                    {list(analysisResults).map((result, index) => (
+                    {analysisResults.map((result, index) => (
                         <div key={index} className="result-item">
                             <h3>{result.filename}</h3>
                             {/* ここで各画像の結果を適切に表示する */}
