@@ -35,7 +35,7 @@ function App() {
         console.log(imgs);
 
         setSelectedFiles(event.target.files);
-        setAnalysisResults(null);
+        setAnalysisResults([]);
         setError("");
     };
 
